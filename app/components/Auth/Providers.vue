@@ -1,22 +1,20 @@
 <template>
-    <UButton block variant="outline" type="submit" size="lg" class="cursor-pointer" color="neutral"
-        label="Continue with Google">
+    <UButton block variant="solid" type="submit" class="cursor-pointer" color="neutral" label="Continue with Apple">
         <template #leading>
-            <UIcon name="i-simple-icons-google" class="size-3" />
+            <UIcon name="i-simple-icons-apple" />
         </template>
     </UButton>
-    <UButton block variant="outline" type="submit" size="lg" class="cursor-pointer" color="neutral"
-        label="Continue with GitHub">
+    <UButton block variant="solid" type="submit" class="cursor-pointer" color="neutral" label="Continue with Google">
         <template #leading>
-            <UIcon name="i-simple-icons-github" class="size-3" />
+            <UIcon name="i-devicon-google" />
         </template>
     </UButton>
-    <UButton block variant="outline" type="submit" size="lg" class="cursor-pointer" color="neutral"
-        label="Continue with Apple">
+    <UButton block variant="subtle" type="submit" class="cursor-pointer" color="neutral" label="Continue with GitHub">
         <template #leading>
-            <UIcon name="i-simple-icons-apple" class="size-3" />
+            <UIcon name="i-simple-icons-github" />
         </template>
     </UButton>
+
 </template>
 
 <script setup lang="ts">

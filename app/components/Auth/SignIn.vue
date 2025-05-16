@@ -1,12 +1,12 @@
 <template>
     <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="onSubmit">
         <div class="col-span-full">
-            <UFormField label="Email" name="email" size="xl">
+            <UFormField label="Email" name="email">
                 <UInput v-model="state.email" type="email" class="w-full" />
             </UFormField>
         </div>
         <div class="col-span-full">
-            <UFormField label="Password" name="password" size="xl">
+            <UFormField label="Password" name="password">
                 <UInput v-model="state.password" placeholder="Password" :type="show ? 'text' : 'password'"
                     :ui="{ trailing: 'pe-1' }" class="w-full">
                     <template #trailing>
@@ -18,8 +18,8 @@
                 </UInput>
             </UFormField>
         </div>
-        <div class="col-span-full mt-12">
-            <UButton block type="submit" size="xl" class="cursor-pointer" color="primary">
+        <div class="col-span-full mt-4">
+            <UButton block type="submit" class="cursor-pointer" color="primary">
                 Enter now
             </UButton>
             <div class="my-2">

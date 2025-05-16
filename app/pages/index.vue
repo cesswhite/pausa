@@ -1,9 +1,6 @@
 <template>
     <NuxtLayout name="default">
-        <div class="flex flex-col gap-4">
-            <UButton to="/auth/sign-in">Sign in</UButton>
-            <UButton to="/auth/sign-up">Sign up</UButton>
-        </div>
+        <LandingHero />
     </NuxtLayout>
 </template>
 

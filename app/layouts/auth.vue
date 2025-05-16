@@ -1,5 +1,9 @@
 <template>
-    <div class="grid h-auto min-h-screen w-full grid-cols-12 items-center justify-center gap-2 bg-white dark:bg-black">
+    <div
+        class="grid h-auto min-h-screen w-full grid-cols-12 items-center justify-center gap-2 bg-white dark:bg-black relative">
+        <div class="fixed top-4 right-4 z-40">
+            <AppSwitchMode />
+        </div>
         <div class="relative col-span-full flex h-full flex-col items-center justify-center rounded-lg md:col-span-6">
             <div
                 class="relative flex w-full flex-col gap-y-12 px-2 py-32 md:w-11/12 md:px-4 md:py-24 lg:w-10/12 xl:w-8/12">
@@ -15,35 +19,39 @@
                     <slot />
                 </div>
             </div>
-            <div class="relative bottom-12 left-0 w-full pb-4 md:absolute">
+            <div class="relative bottom-2 left-0 w-full md:absolute">
                 <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
                     By creating an account or signing in, you agree to our
-                    <NuxtLink to="#" class="text-primary-500 dark:text-primary-400">
+                    <NuxtLink to="/terms-of-service" class="text-primary-500 dark:text-primary-400">
                         Terms of Service
                     </NuxtLink>
                     and
-                    <NuxtLink to="#" class="text-primary-500 dark:text-primary-400">
+                    <NuxtLink to="/privacy-policy" class="text-primary-500 dark:text-primary-400">
                         Privacy Policy
                     </NuxtLink>
                 </small>
             </div>
         </div>
-        <div class="relative col-span-full hidden h-screen md:col-span-6 md:block">
-            <div
-                class="pointer-events-none absolute bottom-0 left-0 z-20 flex h-1/3 w-full items-end justify-center rounded-lg bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                <div class="flex w-full flex-col gap-y-2 px-4 pb-12 2xl:px-12">
-                    <h1 class="text-dark-50 text-center text-3xl font-bold tracking-tight lg:text-4xl">
-                        {{ auth_title }}
-                    </h1>
-                    <p class="text-dark-50/60 mx-auto text-center font-normal tracking-tight md:text-lg/6">
-                        {{ auth_description }}
-                    </p>
+        <div class="relative col-span-full hidden h-screen md:col-span-6 md:block p-2">
+            <div class="absolute bottom-0 left-0 z-20 h-1/3 w-full p-2 overflow-hidden">
+                <div
+                    class="pointer-events-none w-full h-full  flex items-end justify-center rounded-lg bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <div class="flex w-full flex-col gap-y-2 px-4 pb-12 2xl:px-12">
+                        <h1 class="text-dark-50 text-center text-3xl font-bold tracking-tight lg:text-4xl">
+                            {{ auth_title }}
+                        </h1>
+                        <p class="text-dark-50/60 mx-auto text-center font-normal tracking-tight md:text-lg/6">
+                            {{ auth_description }}
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="relative z-10 h-full overflow-hidden rounded-lg p-2">
-                <img :src="auth_image ?? 'https://images.unsplash.com/photo-1568402102990-bc541580b59f'"
+            <div class="relative z-10 h-full overflow-hidden rounded-lg ">
+                <img v-motion-fade v-if="$colorMode.value === 'light'" :src="auth_image_light"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
                     loading="lazy" quality="80" />
+                <img v-motion-fade v-else :src="auth_image_dark" :alt="auth_image_alt ?? 'Eco Development Studios'"
+                    class="size-full rounded-lg object-cover" loading="lazy" quality="80" />
             </div>
         </div>
     </div>
@@ -55,7 +63,8 @@ import type { FormError, FormSubmitEvent } from "#ui/types";
 interface AuthRouteMeta {
     auth_title?: string;
     auth_description?: string;
-    auth_image?: string;
+    auth_image_light?: string;
+    auth_image_dark?: string;
     auth_image_alt?: string;
     auth_form_title?: string;
     auth_form_description?: string;
@@ -68,7 +77,7 @@ const state = reactive({
     confirm_password: undefined,
 });
 const route = useRoute();
-const { auth_title, auth_description, auth_image, auth_image_alt, auth_form_title, auth_form_description } =
+const { auth_title, auth_description, auth_image_light, auth_image_dark, auth_image_alt, auth_form_title, auth_form_description } =
     route.meta as AuthRouteMeta;
 const validate = (state: any): FormError[] => {
     const errors = [];
