@@ -21,7 +21,7 @@ onMounted(async () => {
 async function verifyOtp() {
     const { error } = await client.auth.verifyOtp({
         token_hash: route.query.token_hash as string,
-        type: route.query.type as 'email',
+        type: route.query.type as 'email' | 'magiclink',
     })
     if (error) {
         toast.add({
@@ -39,5 +39,3 @@ async function verifyOtp() {
     }
 }
 </script>
-
-<style scoped></style>
