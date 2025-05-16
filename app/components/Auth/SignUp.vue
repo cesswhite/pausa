@@ -55,12 +55,7 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from "#ui/types";
 
-const state = reactive({
-    name: undefined,
-    email: undefined,
-    password: undefined,
-    confirm_password: undefined,
-});
+const { state } = storeToRefs(useAuthStore())
 const show = ref(false);
 const showConfirm = ref(false);
 const validate = (state: any): FormError[] => {
@@ -80,9 +75,9 @@ const validate = (state: any): FormError[] => {
 };
 
 async function onSubmit(event: FormSubmitEvent<any>) {
-    state.email = undefined;
-    state.password = undefined;
-    state.confirm_password = undefined;
-    state.name = undefined;
+    state.value.email = undefined;
+    state.value.password = undefined;
+    state.value.confirm_password = undefined;
+    state.value.name = undefined;
 }
 </script>

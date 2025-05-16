@@ -11,12 +11,13 @@
             <UIcon name="i-simple-icons-github" />
         </template>
     </UButton>
-
+    <AuthMagicLink />
 </template>
 <script setup lang="ts">
 const client = useSupabaseClient()
 const loadingButtonGoogle = ref(false)
 const loadingButtonGithub = ref(false)
+const loadingButtonMagicLink = ref(false)
 
 async function signInWithGitHub() {
     loadingButtonGithub.value = true
@@ -40,5 +41,16 @@ async function signInWithGoogle() {
     });
     loadingButtonGoogle.value = false
     if (error) console.log(error);
+}
+
+async function signInWithEmail() {
+    const { data, error } = await client.auth.signInWithOtp({
+        email: 'valid.email@supabase.io',
+        options: {
+            // set this to false if you do not want the user to be automatically signed up
+            shouldCreateUser: false,
+            emailRedirectTo: 'https://example.com/welcome',
+        },
+    })
 }
 </script>
