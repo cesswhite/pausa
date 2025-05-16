@@ -1,5 +1,5 @@
 <template>
-    <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="onSubmit">
+    <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="signUpNewUser">
         <div class="col-span-full">
             <UFormField label="Email" name="email">
                 <UInput v-model="state.email" type="email" class="w-full" />
@@ -55,12 +55,12 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from "#ui/types";
 
+const client = useSupabaseClient()
 const { state } = storeToRefs(useAuthStore())
 const show = ref(false);
 const showConfirm = ref(false);
 const validate = (state: any): FormError[] => {
     const errors = [];
-    if (!state.name) errors.push({ name: "name", message: "Field required" });
     if (!state.email) errors.push({ name: "email", message: "Field required" });
     if (!state.password)
         errors.push({ name: "password", message: "Field required" });
@@ -74,7 +74,29 @@ const validate = (state: any): FormError[] => {
     return errors;
 };
 
-async function onSubmit(event: FormSubmitEvent<any>) {
+async function signUpNewUser() {
+    if (!state.value.email || !state.value.password) {
+        return
+    }
+    try {
+        const { data, error } = await client.auth.signUp({
+            email: state.value.email,
+            password: state.value.password,
+            options: {
+                emailRedirectTo: 'http://localhost:3000/auth/confirm',
+            },
+        })
+        if (error) {
+            console.error(error)
+        } else {
+            resetForm()
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+async function resetForm() {
     state.value.email = undefined;
     state.value.password = undefined;
     state.value.confirm_password = undefined;
