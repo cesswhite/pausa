@@ -5,11 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const session = useSupabaseSession()
 
-if (session.value) {
-    navigateTo('/dashboard')
-}
 definePageMeta({
     auth_title: "Join our community of innovators and creators",
     auth_description: "Start your journey with us and unlock a world of possibilities. Create your account today to access exclusive features, connect with like-minded individuals, and bring your ideas to life.",

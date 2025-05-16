@@ -2,8 +2,7 @@
     <Transition name="fade">
         <div v-show="progress !== 0"
             class="fixed z-[200] top-0 left-0 w-full h-dvh bg-dark-50/50 dark:bg-dark-950/80 backdrop-blur-md flex items-center justify-center">
-            <NuxtLoadingIndicator />
-            <div class="size-20 animate-pulse">
+            <div class="size-12 animate-pulse">
                 <AppLogo />
             </div>
         </div>

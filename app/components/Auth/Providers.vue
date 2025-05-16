@@ -1,10 +1,4 @@
 <template>
-    <UButton @click="signInWithApple" block variant="solid" type="button" class="cursor-pointer" color="neutral"
-        label="Continue with Apple" :loading="loadingButtonApple">
-        <template #leading>
-            <UIcon name="i-simple-icons-apple" />
-        </template>
-    </UButton>
     <UButton @click="signInWithGoogle" block variant="solid" type="button" class="cursor-pointer" color="neutral"
         label="Continue with Google" :loading="loadingButtonGoogle">
         <template #leading>
@@ -23,8 +17,6 @@
 const client = useSupabaseClient()
 const loadingButtonGoogle = ref(false)
 const loadingButtonGithub = ref(false)
-const loadingButtonApple = ref(false)
-
 
 async function signInWithGitHub() {
     loadingButtonGithub.value = true
@@ -47,18 +39,6 @@ async function signInWithGoogle() {
         },
     });
     loadingButtonGoogle.value = false
-    if (error) console.log(error);
-}
-
-async function signInWithApple() {
-    loadingButtonApple.value = true
-    const { error } = await client.auth.signInWithOAuth({
-        provider: "apple",
-        options: {
-            redirectTo: '/dashboard',
-        },
-    });
-    loadingButtonApple.value = false
     if (error) console.log(error);
 }
 </script>

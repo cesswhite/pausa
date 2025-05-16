@@ -5,11 +5,6 @@
 </template>
 
 <script setup lang="ts">
-const session = useSupabaseSession()
-
-if (session.value) {
-    navigateTo('/dashboard')
-}
 definePageMeta({
     auth_title: "The best way to manage your business from anywhere",
     auth_description: "Eco Development Studios is a digital agency specializing in innovative solutions that drive business growth through custom software development, strategic marketing, and comprehensive digital transformation services.",
