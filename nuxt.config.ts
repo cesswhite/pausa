@@ -19,6 +19,10 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  supabase: {
+    redirect: false,
+    types: './types/database.types'
+  },
   compatibilityDate: '2025-05-07',
   modules: ['@nuxt/ui', '@pinia/nuxt', "@nuxtjs/supabase", '@vueuse/motion/nuxt'],
   typescript: {

@@ -1,10 +1,18 @@
 <template>
-    <NuxtLayout name="default">
-        <LandingHero />
-    </NuxtLayout>
+    <div class="h-full w-full relative">
+        <NuxtLayout name="default">
+            <LandingHero />
+        </NuxtLayout>
+    </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const session = useSupabaseSession()
+
+if (session.value) {
+    navigateTo('/dashboard')
+}
+
 useSeoMeta({
     title: "v4.20 | Opinionated Nuxt Starter Template",
     ogTitle: "v4.20 | Opinionated Nuxt Starter Template",
@@ -14,7 +22,6 @@ useSeoMeta({
     twitterCard: "summary_large_image",
     ogUrl: 'https://v420.ecostudios.dev/',
     twitterImage: "https://res.cloudinary.com/dpvsklksg/image/upload/ecov4/v420-og-image.webp",
-    twitterCard: "summary_large_image",
     twitterTitle: "v4.20 | Opinionated Nuxt Starter Template",
     twitterDescription: "Opinionated Nuxt Starter Template Minimal, Fast, and Developer-Friendly by Eco Development Studios",
     ogImageWidth: 1200,
@@ -33,4 +40,5 @@ useHead({
         }
     ]
 })
+
 </script>
