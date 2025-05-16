@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   compatibilityDate: '2025-05-07',
-  modules: ['@nuxt/ui', '@pinia/nuxt'],
+  modules: ['@nuxt/ui', '@pinia/nuxt', "@nuxtjs/supabase", '@vueuse/motion/nuxt'],
   typescript: {
     typeCheck: true
   }

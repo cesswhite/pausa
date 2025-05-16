@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@nuxt/ui": "3.1.2",
+    "@nuxtjs/supabase": "1.5.1",
     "@pinia/nuxt": "0.11.0",
+    "@vueuse/motion": "^3.0.3",
     "nuxt": "3.17.3",
     "pinia": "3.0.2",
     "vue": "latest",

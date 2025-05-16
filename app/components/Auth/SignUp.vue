@@ -1,0 +1,82 @@
+<template>
+    <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="onSubmit">
+        <div class="col-span-full">
+            <UFormField label="Email" name="email" size="xl">
+                <UInput v-model="state.email" type="email" class="w-full" />
+            </UFormField>
+        </div>
+        <div class="col-span-full md:col-span-6">
+            <UFormField label="Password" name="password" size="xl">
+                <UInput v-model="state.password" placeholder="Password" :type="show ? 'text' : 'password'"
+                    :ui="{ trailing: 'pe-1' }" class="w-full">
+                    <template #trailing>
+                        <UButton color="neutral" variant="link" size="sm"
+                            :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+                            :aria-label="show ? 'Hide password' : 'Show password'" :aria-pressed="show"
+                            aria-controls="password" @click="show = !show" />
+                    </template>
+                </UInput>
+            </UFormField>
+        </div>
+        <div class="col-span-full md:col-span-6">
+            <UFormField label="Confirm Password" name="confirm_password" size="xl">
+                <UInput v-model="state.confirm_password" placeholder="Confirm Password"
+                    :type="showConfirm ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full">
+                    <template #trailing>
+                        <UButton color="neutral" variant="link" size="sm"
+                            :icon="showConfirm ? 'i-lucide-eye-off' : 'i-lucide-eye'" :aria-label="showConfirm ? 'Hide password' : 'Show password'
+                                " :aria-pressed="showConfirm" aria-controls="password"
+                            @click="showConfirm = !showConfirm" />
+                    </template>
+                </UInput>
+            </UFormField>
+        </div>
+        <div class="col-span-full mt-12">
+            <UButton block type="submit" size="xl" class="cursor-pointer" color="primary">
+                Create Account
+            </UButton>
+            <div class="mt-4">
+                <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
+                    Already have an account?
+                    <NuxtLink to="/auth/sign-in" class="text-primary-500 dark:text-primary-400">Sign in
+                    </NuxtLink>
+                </small>
+            </div>
+        </div>
+    </UForm>
+</template>
+
+<script setup lang="ts">
+import type { FormError, FormSubmitEvent } from "#ui/types";
+
+const state = reactive({
+    name: undefined,
+    email: undefined,
+    password: undefined,
+    confirm_password: undefined,
+});
+const show = ref(false);
+const showConfirm = ref(false);
+const validate = (state: any): FormError[] => {
+    const errors = [];
+    if (!state.name) errors.push({ name: "name", message: "Field required" });
+    if (!state.email) errors.push({ name: "email", message: "Field required" });
+    if (!state.password)
+        errors.push({ name: "password", message: "Field required" });
+    if (!state.confirm_password)
+        errors.push({ name: "confirm_password", message: "Field required" });
+    if (state.password !== state.confirm_password)
+        errors.push({
+            name: "confirm_password",
+            message: "Passwords do not match",
+        });
+    return errors;
+};
+
+async function onSubmit(event: FormSubmitEvent<any>) {
+    state.email = undefined;
+    state.password = undefined;
+    state.confirm_password = undefined;
+    state.name = undefined;
+}
+</script>
