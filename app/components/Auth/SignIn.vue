@@ -22,6 +22,12 @@
             <UButton block type="submit" size="xl" class="cursor-pointer" color="primary">
                 Enter now
             </UButton>
+            <div class="my-2">
+                <USeparator label="Or" />
+            </div>
+            <div class="flex flex-col gap-y-2">
+                <AuthProviders />
+            </div>
             <div class="mt-4">
                 <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
                     Don't have an account?
