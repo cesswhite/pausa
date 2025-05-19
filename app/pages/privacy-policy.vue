@@ -4,7 +4,3 @@
         <p>Last updated: 16/05/2025</p>
     </div>
 </template>
-
-<script setup lang="ts">
-
-</script>

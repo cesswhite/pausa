@@ -4,6 +4,7 @@
         Sign Out
     </UButton>
 </template>
+
 <script setup lang="ts">
 const client = useSupabaseClient();
 const signOut = async () => {

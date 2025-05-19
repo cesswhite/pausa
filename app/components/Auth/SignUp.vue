@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from "#ui/types";
+import type { FormError } from "#ui/types";
 
 const client = useSupabaseClient()
 const { state } = storeToRefs(useAuthStore())

@@ -58,7 +58,6 @@
 </template>
 
 <script setup lang="ts">
-import type { FormError, FormSubmitEvent } from "#ui/types";
 
 interface AuthRouteMeta {
     auth_title?: string;
@@ -70,35 +69,9 @@ interface AuthRouteMeta {
     auth_form_description?: string;
 }
 
-const state = reactive({
-    name: undefined,
-    email: undefined,
-    password: undefined,
-    confirm_password: undefined,
-});
+
 const route = useRoute();
 const { auth_title, auth_description, auth_image_light, auth_image_dark, auth_image_alt, auth_form_title, auth_form_description } =
     route.meta as AuthRouteMeta;
-const validate = (state: any): FormError[] => {
-    const errors = [];
-    if (!state.name) errors.push({ name: "name", message: "Field required" });
-    if (!state.email) errors.push({ name: "email", message: "Field required" });
-    if (!state.password)
-        errors.push({ name: "password", message: "Field required" });
-    if (!state.confirm_password)
-        errors.push({ name: "confirm_password", message: "Field required" });
-    if (state.password !== state.confirm_password)
-        errors.push({
-            name: "confirm_password",
-            message: "Passwords do not match",
-        });
-    return errors;
-};
 
-async function onSubmit(event: FormSubmitEvent<any>) {
-    state.email = undefined;
-    state.password = undefined;
-    state.confirm_password = undefined;
-    state.name = undefined;
-}
 </script>
