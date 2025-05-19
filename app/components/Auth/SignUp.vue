@@ -10,7 +10,7 @@
                 <UInput v-model="state.password" placeholder="Password" :type="show ? 'text' : 'password'"
                     :ui="{ trailing: 'pe-1' }" class="w-full">
                     <template #trailing>
-                        <UButton color="neutral" variant="link" size="sm"
+                        <UButton color="neutral" variant="link" size="sm" class="cursor-pointer"
                             :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
                             :aria-label="show ? 'Hide password' : 'Show password'" :aria-pressed="show"
                             aria-controls="password" @click="show = !show" />
