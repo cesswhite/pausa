@@ -5,8 +5,7 @@
             <AppSwitchMode />
         </div>
         <div class="relative col-span-full flex h-full flex-col items-center justify-center rounded-lg md:col-span-6">
-            <div
-                class="relative flex w-full flex-col gap-y-12 px-2 py-32 md:w-11/12 md:px-4 md:py-24 lg:w-10/12 xl:w-8/12">
+            <div class="relative flex w-full flex-col gap-y-12 py-32 px-4 md:py-24 lg:w-10/12 xl:w-8/12">
                 <div class="flex flex-col items-start justify-center">
                     <h1 class="text-dark-950 dark:text-dark-50 w-full text-left text-xl font-bold">
                         {{ auth_form_title }}
@@ -47,11 +46,12 @@
                 </div>
             </div>
             <div class="relative z-10 h-full overflow-hidden rounded-lg ">
-                <img v-motion-fade v-if="$colorMode.value === 'light'" :src="auth_image_light"
+                <img v-show="$colorMode.value === 'light'" :src="auth_image_light"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
                     loading="lazy" quality="80" />
-                <img v-motion-fade v-else :src="auth_image_dark" :alt="auth_image_alt ?? 'Eco Development Studios'"
-                    class="size-full rounded-lg object-cover" loading="lazy" quality="80" />
+                <img v-show="$colorMode.value === 'dark'" :src="auth_image_dark"
+                    :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
+                    loading="lazy" quality="80" />
             </div>
         </div>
     </div>

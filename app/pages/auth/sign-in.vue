@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name="auth">
-        <AuthSignIn v-motion-fade />
+        <AuthSignIn />
     </NuxtLayout>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
   <NuxtLayout>
-    <AppLoadingFull />
     <UApp>
       <NuxtPage />
     </UApp>

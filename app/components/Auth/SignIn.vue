@@ -16,6 +16,12 @@
                             aria-controls="password" @click="show = !show" />
                     </template>
                 </UInput>
+                <template #help>
+                    <div class="flex justify-end">
+                        <NuxtLink to="/auth/forgot-password" class="text-primary-500 dark:text-primary-400">Forgot your
+                            password?</NuxtLink>
+                    </div>
+                </template>
             </UFormField>
         </div>
         <div class="col-span-full mt-4">
