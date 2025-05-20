@@ -1,5 +1,5 @@
 <template>
-    <UButton @click="signInWithEmail" block variant="link" type="button" class="cursor-pointer" color="neutral"
+    <UButton @click="signInWithEmail" block variant="outline" type="button" class="cursor-pointer" color="neutral"
         label="Continue with Magic Link" :loading="loadingButtonMagicLink">
         <template #leading>
             <UIcon name="i-lucide-sparkles" />

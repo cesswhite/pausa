@@ -50,7 +50,7 @@
                     </NuxtLink>
                 </small>
                 <NuxtLink to="/auth/forgot-password"
-                    class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
+                    class="text-primary-500 dark:text-primary-400 inline-block w-full text-center text-sm">
                     Forgot your password?
                 </NuxtLink>
             </div>
