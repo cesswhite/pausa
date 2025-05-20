@@ -1,13 +1,13 @@
 <template>
     <div class="flex items-center justify-center h-screen">
-        <div class="relative w-1/3 text-center">
+        <div class="relative w-56 text-center mx-auto">
             <Transition name="message-fade" mode="out-in">
                 <span :key="currentIndex"
-                    class="text-sm text-dark-950/50 dark:text-dark-50/50 text-center inline-block w-full mb-4">
+                    class="text-base text-dark-950/50 dark:text-dark-50/50 text-center inline-block w-full mb-4">
                     {{ currentLoadingMessage }}
                 </span>
             </Transition>
-            <UProgress animation="carousel" />
+            <UProgress animation="carousel" size="md" />
         </div>
     </div>
 </template>

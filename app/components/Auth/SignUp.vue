@@ -45,13 +45,14 @@
             <div class="mt-4 flex flex-col justify-between items-center gap-y-2">
                 <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
                     Already have an account?
-                    <NuxtLink to="/auth/sign-in" class="text-primary-500 dark:text-primary-400">Sign in
+                    <NuxtLink to="/auth/sign-in" class="text-primary-500 dark:text-primary-400">
+                        Sign in
                     </NuxtLink>
                 </small>
                 <NuxtLink to="/auth/forgot-password"
                     class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
-                    Forgot your
-                    password?</NuxtLink>
+                    Forgot your password?
+                </NuxtLink>
             </div>
         </div>
     </UForm>
@@ -89,6 +90,7 @@ async function signUpNewUser() {
         return
     }
     try {
+        loading.value = true
         const { data, error } = await client.auth.signUp({
             email: state.value.email,
             password: state.value.password,
@@ -96,10 +98,10 @@ async function signUpNewUser() {
                 emailRedirectTo: 'http://localhost:3000/auth/confirm',
             },
         })
+
         if (error) {
             console.error(error)
         } else {
-            loading.value = false
             toast.add({
                 title: 'Success',
                 description: 'Email for verification has been sent',
