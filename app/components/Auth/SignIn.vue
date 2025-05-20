@@ -49,6 +49,7 @@ const client = useSupabaseClient()
 const router = useRouter()
 const toast = useToast()
 const { state } = storeToRefs(useAuthStore())
+const { resetState } = useAuthStore()
 const show = ref(false);
 
 const validate = (state: any): FormError[] => {
@@ -76,15 +77,14 @@ async function signInWithEmail() {
                 description: 'Signed in successfully',
                 color: 'success',
             })
-            resetForm()
-            router.push('/dashboard')
+            resetState()
+            setTimeout(() => {
+                router.push('/dashboard')
+            }, 1500)
         }
     } catch (error) {
         console.error(error)
     }
 }
-async function resetForm() {
-    state.value.email = undefined;
-    state.value.password = undefined;
-}
+
 </script>

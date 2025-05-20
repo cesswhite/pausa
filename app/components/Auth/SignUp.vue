@@ -66,6 +66,9 @@ const show = ref(false);
 const showConfirm = ref(false);
 const loading = ref(false)
 const toast = useToast()
+const router = useRouter()
+const { resetState } = useAuthStore()
+
 const validate = (state: any): FormError[] => {
     const errors = [];
     if (!state.email) errors.push({ name: "email", message: "Field required" });
@@ -102,17 +105,14 @@ async function signUpNewUser() {
                 description: 'Email for verification has been sent',
                 color: 'success',
             })
-            resetForm()
+            resetState()
+            setTimeout(() => {
+                router.push('/auth/sign-in')
+            }, 1500)
         }
     } catch (error) {
         console.error(error)
     }
 }
 
-async function resetForm() {
-    state.value.email = undefined;
-    state.value.password = undefined;
-    state.value.confirm_password = undefined;
-    state.value.name = undefined;
-}
 </script>

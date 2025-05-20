@@ -1,7 +1,14 @@
 <template>
-    <div>
-        <!-- TODO: Add a loading spinner -->
-        Verifying OTP...
+    <div class="flex items-center justify-center h-screen">
+        <div class="relative w-1/3 text-center">
+            <Transition name="message-fade" mode="out-in">
+                <span :key="currentIndex"
+                    class="text-sm text-dark-950/50 dark:text-dark-50/50 text-center inline-block w-full mb-4">
+                    {{ currentLoadingMessage }}
+                </span>
+            </Transition>
+            <UProgress animation="carousel" />
+        </div>
     </div>
 </template>
 
@@ -11,13 +18,35 @@ const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 
-onMounted(async () => {
-    console.log(route.query)
+const loadingMessages = [
+    "Verifying your account...",
+    "Please wait a moment...",
+    "Processing your verification...",
+    "Almost there...",
+    "Securing your account...",
+    "Finalizing verification..."
+]
+
+const currentIndex = ref(0)
+const currentLoadingMessage = computed(() => loadingMessages[currentIndex.value])
+
+let messageTimer: NodeJS.Timeout | null = null
+
+onMounted(() => {
+    messageTimer = setInterval(() => {
+        currentIndex.value = (currentIndex.value + 1) % loadingMessages.length
+    }, 6000)
+
     if (route.query.token_hash && route.query.type) {
-        await verifyOtp()
+        verifyOtp()
     }
 })
 
+onUnmounted(() => {
+    if (messageTimer) {
+        clearInterval(messageTimer)
+    }
+})
 
 async function verifyOtp() {
     const { error } = await client.auth.verifyOtp({
@@ -44,3 +73,15 @@ async function verifyOtp() {
     }
 }
 </script>
+
+<style scoped>
+.message-fade-enter-active,
+.message-fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.message-fade-enter-from,
+.message-fade-leave-to {
+    opacity: 0;
+}
+</style>

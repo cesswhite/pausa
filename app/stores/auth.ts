@@ -7,6 +7,16 @@ export const useAuthStore = defineStore('useAuthStore', {
             confirm_password: undefined,
         }
     }),
+    actions: {
+        resetState() {
+            this.state = {
+                name: undefined,
+                email: undefined,
+                password: undefined,
+                confirm_password: undefined,
+            }
+        }
+    }
 })
 
 if (import.meta.hot) {
