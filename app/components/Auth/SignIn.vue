@@ -16,12 +16,6 @@
                             aria-controls="password" @click="show = !show" />
                     </template>
                 </UInput>
-                <template #help>
-                    <div class="flex justify-end">
-                        <NuxtLink to="/auth/forgot-password" class="text-primary-500 dark:text-primary-400">Forgot your
-                            password?</NuxtLink>
-                    </div>
-                </template>
             </UFormField>
         </div>
         <div class="col-span-full mt-4">
@@ -34,12 +28,16 @@
             <div class="flex flex-col gap-y-2">
                 <AuthProviders />
             </div>
-            <div class="mt-4">
+            <div class="mt-4 flex flex-col justify-between items-center gap-y-2">
                 <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
                     Don't have an account?
                     <NuxtLink to="/auth/sign-up" class="text-primary-500 dark:text-primary-400">Create one here
                     </NuxtLink>
                 </small>
+                <NuxtLink to="/auth/forgot-password"
+                    class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
+                    Forgot your
+                    password?</NuxtLink>
             </div>
         </div>
     </UForm>

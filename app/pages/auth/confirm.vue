@@ -12,6 +12,7 @@ const router = useRouter()
 const toast = useToast()
 
 onMounted(async () => {
+    console.log(route.query)
     if (route.query.token_hash && route.query.type) {
         await verifyOtp()
     }
@@ -21,7 +22,7 @@ onMounted(async () => {
 async function verifyOtp() {
     const { error } = await client.auth.verifyOtp({
         token_hash: route.query.token_hash as string,
-        type: route.query.type as 'email' | 'magiclink',
+        type: route.query.type as 'email' | 'magiclink' | 'recovery',
     })
     if (error) {
         toast.add({
@@ -35,7 +36,11 @@ async function verifyOtp() {
             description: 'OTP verified',
             color: 'success',
         })
-        router.push('/dashboard')
+        if (route.query.type === 'recovery') {
+            router.push('/dashboard/settings')
+        } else {
+            router.push('/dashboard')
+        }
     }
 }
 </script>
