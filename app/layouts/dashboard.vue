@@ -11,7 +11,7 @@
                 <div class="flex-1 w-full mt-1 px-2">
                     <DashboardSidebarNavigation />
                 </div>
-                <div class="flex w-full">
+                <div class="flex w-full border-t border-dark-200 dark:border-dark-50/5 px-4 py-6">
                     <DashboardSidebarHandleUser />
                 </div>
             </div>
