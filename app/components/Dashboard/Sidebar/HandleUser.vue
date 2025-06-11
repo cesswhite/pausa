@@ -9,14 +9,15 @@
         }" :ui="{
             content: 'w-64'
         }">
-            <UButton block color="neutral" variant="ghost" size="lg" class="w-full">
+            <UButton block color="neutral" variant="ghost" size="lg" class="w-full cursor-pointer">
                 <template #leading>
                     <UAvatar :src="user?.user_metadata.picture" class="size-12" />
                 </template>
                 <template #default>
-                    <div class="flex flex-col gap-1 text-left items-start justify-between w-full">
-                        <span class="text-sm font-medium">{{ user?.user_metadata.full_name }}</span>
-                        <span class="text-xs text-neutral-500">{{ user?.email }}</span>
+                    <div class="flex flex-col gap-0 text-left items-start justify-between w-full">
+                        <span class="text-sm text-dark-900 dark:text-dark-50 font-medium">{{
+                            user?.user_metadata.full_name }}</span>
+                        <span class="text-xs text-dark-500 dark:text-dark-50/60">{{ user?.email }}</span>
                     </div>
                 </template>
                 <template #trailing>
