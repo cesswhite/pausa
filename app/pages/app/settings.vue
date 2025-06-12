@@ -1,11 +1,13 @@
 <template>
     <NuxtLayout name="dashboard">
-        Settings
+
     </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
+    title: 'Settings',
+    description: 'Minimun settings for the application',
     middleware: 'auth'
 })
 </script>

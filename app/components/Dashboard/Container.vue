@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Dashboard</h1>
         <pre>
             {{ user }}
         </pre>
