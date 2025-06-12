@@ -1,11 +1,12 @@
 <template>
-    <UButton block @click="signOut" icon="i-lucide-log-out" variant="ghost" color="neutral" size="xs"
-        class="flex items-center justify-start gap-2">
-        Sign Out
-    </UButton>
+    <UButton block :aria-label="label" :label="label" @click="signOut" icon="i-lucide-log-out" variant="link"
+        color="neutral" class="cursor-pointer flex items-center justify-start gap-2" />
 </template>
 
 <script setup lang="ts">
+const props = defineProps<{
+    label?: string
+}>()
 const client = useSupabaseClient();
 const signOut = async () => {
     const { error } = await client.auth.signOut();

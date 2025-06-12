@@ -1,14 +1,17 @@
 <template>
     <ClientOnly>
-        <UButton aria-label="button to switch theme dark to light" @click="toggleDark" variant="link"
-            class="cursor-pointer" color="primary" size="lg" :icon="color.preference === 'dark'
+        <UButton block :aria-label="label" :label="label" @click="toggleDark" variant="link"
+            class="cursor-pointer flex items-center justify-start gap-2" color="neutral" :icon="color.preference === 'dark'
                 ? 'i-lucide-sun'
                 : 'i-lucide-moon'
                 " />
     </ClientOnly>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const props = defineProps<{
+    label?: string
+}>()
 const color = useColorMode();
 function toggleDark() {
     color.preference = color.value === "dark" ? "light" : "dark";
