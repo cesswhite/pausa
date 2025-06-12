@@ -3,9 +3,11 @@
         <UDropdownMenu v-model:open="open" :items="items" :content="{
             align: 'start',
             side: 'top',
-            sideOffset: 8
+            sideOffset: 12,
         }" :ui="{
-            content: 'w-64'
+            content: 'w-70',
+            group: '',
+            item: 'group relative w-full flex items-center select-none outline-none before:absolute before:z-[-1] before:inset-px before:rounded-md data-disabled:cursor-not-allowed data-disabled:opacity-75 p-0',
         }">
             <UButton block color="neutral" variant="ghost" size="lg" class="w-full cursor-pointer">
                 <template #leading>
@@ -25,7 +27,8 @@
 
             </UButton>
             <template #dashboard>
-                <UButton color="neutral" variant="link" class="w-full cursor-pointer" icon="i-lucide-home"
+                <UButton block color="neutral" variant="link"
+                    class="cursor-pointer flex items-center justify-start px-2 py-2.5" icon="i-lucide-home"
                     label="Dashboard" />
             </template>
             <template #profile>

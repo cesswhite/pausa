@@ -1,7 +1,7 @@
 <template>
     <ClientOnly>
         <UButton block :aria-label="label" :label="label" @click="toggleDark" variant="link"
-            class="cursor-pointer flex items-center justify-start gap-2" color="neutral" :icon="color.preference === 'dark'
+            class="cursor-pointer flex items-center justify-start px-2 py-2.5" color="neutral" :icon="color.preference === 'dark'
                 ? 'i-lucide-sun'
                 : 'i-lucide-moon'
                 " />
