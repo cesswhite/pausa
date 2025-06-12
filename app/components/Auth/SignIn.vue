@@ -79,7 +79,7 @@ async function signInWithEmail() {
             })
             resetState()
             setTimeout(() => {
-                router.push('/dashboard')
+                router.push('/app/dashboard')
             }, 1500)
         }
     } catch (error) {

@@ -23,7 +23,7 @@ async function signInWithGitHub() {
     const { error } = await client.auth.signInWithOAuth({
         provider: "github",
         options: {
-            redirectTo: '/dashboard',
+            redirectTo: '/app/dashboard',
         },
     });
     loadingButtonGithub.value = false
@@ -35,7 +35,7 @@ async function signInWithGoogle() {
     const { error } = await client.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: '/dashboard',
+            redirectTo: '/app/dashboard',
         },
     });
     loadingButtonGoogle.value = false

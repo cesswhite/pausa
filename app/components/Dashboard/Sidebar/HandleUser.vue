@@ -1,7 +1,5 @@
 <template>
     <div class="flex flex-col gap-2 w-full">
-        <!-- <AuthSignOut />
-        <AppSwitchMode /> -->
         <UDropdownMenu v-model:open="open" :items="items" :content="{
             align: 'start',
             side: 'top',
@@ -43,9 +41,7 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
 const user = useSupabaseUser()
-const colorMode = useColorMode()
 const open = ref(false)
-
 const items = ref<DropdownMenuItem[]>([[
     {
         label: 'Dashboard',

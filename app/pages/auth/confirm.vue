@@ -66,9 +66,9 @@ async function verifyOtp() {
             color: 'success',
         })
         if (route.query.type === 'recovery') {
-            router.push('/dashboard/settings')
+            router.push('/app/settings')
         } else {
-            router.push('/dashboard')
+            router.push('/app/dashboard')
         }
     }
 }

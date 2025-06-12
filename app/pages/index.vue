@@ -11,7 +11,7 @@ const session = useSupabaseSession()
 
 watchEffect(async () => {
     if (session.value?.access_token) {
-        await navigateTo('/dashboard');
+        await navigateTo('/app/dashboard');
     }
 });
 
