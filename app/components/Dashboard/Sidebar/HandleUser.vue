@@ -14,17 +14,16 @@
                     <UAvatar :src="user?.user_metadata.picture" class="size-10" />
                 </template>
                 <template #default>
-                    <div class="flex flex-col gap-0 text-left items-start justify-between w-full">
+                    <div class="hidden xl:flex flex-col gap-0 text-left items-start justify-between w-full">
                         <span class="text-sm text-dark-900 dark:text-dark-50 font-medium">{{
                             user?.user_metadata.full_name }}</span>
                         <span class="text-xs text-dark-500 dark:text-dark-50/60">{{ user?.email }}</span>
                     </div>
                 </template>
                 <template #trailing>
-                    <UIcon v-if="!open" name="i-lucide-chevron-down" color="neutral" variant="ghost" class="size-8" />
-                    <UIcon v-else name="i-lucide-chevron-up" color="neutral" variant="ghost" class="size-8" />
+                    <UIcon v-if="!open" name="i-lucide-chevron-down" color="neutral" variant="ghost" class="size-6" />
+                    <UIcon v-else name="i-lucide-chevron-up" color="neutral" variant="ghost" class="size-6" />
                 </template>
-
             </UButton>
             <template #dashboard>
                 <UButton block color="neutral" variant="link"
