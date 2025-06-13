@@ -27,7 +27,7 @@
                         <DashboardSidebarNavigation />
                     </template>
                 </USlideover>
-                <AppBreadcrumb />
+                <AppBreadcrumb :current-page="getRouteName" />
                 <AppTitle>{{ getRouteName }}</AppTitle>
             </div>
             <div class="w-full relative">

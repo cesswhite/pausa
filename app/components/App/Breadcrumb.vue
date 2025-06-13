@@ -9,12 +9,16 @@
 <script setup lang="ts">
 import type { BreadcrumbItem } from '@nuxt/ui'
 
+const props = defineProps<{
+    currentPage: string
+}>()
+
 const items = ref<BreadcrumbItem[]>([
     {
         label: 'App',
     },
     {
-        label: 'Dashboard',
+        label: props.currentPage,
     },
 ])
 </script>
