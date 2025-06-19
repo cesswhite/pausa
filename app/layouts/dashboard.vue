@@ -20,7 +20,7 @@
             </div>
         </div>
         <div
-            class="col-span-full lg:col-span-13 xl:col-span-13 2xl:col-span-13 overflow-y-scroll min-h-screen h-auto px-4 py-2 scrollbar-hide flex flex-col">
+            class="col-span-full lg:col-span-13 xl:col-span-13 2xl:col-span-13 overflow-y-scroll min-h-screen h-auto px-4 pt-2 pb-12 scrollbar-hide flex flex-col">
             <div class="flex flex-col items-start justify-center min-h-17 h-17">
                 <USlideover v-model:open="openSidebar" side="left">
                     <UButton size="xs" color="neutral" variant="link" icon="i-lucide-panel-left-open"
