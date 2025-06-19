@@ -2,13 +2,14 @@
     <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="signUpNewUser">
         <div class="col-span-full">
             <UFormField label="Email" name="email">
-                <UInput v-model="state.email" type="email" class="w-full" :disabled="loading" />
+                <UInput v-model="state.email" variant="subtle" placeholder="Email" type="email" class="w-full"
+                    :disabled="loading" />
             </UFormField>
         </div>
         <div class="col-span-full md:col-span-6">
             <UFormField label="Password" name="password">
-                <UInput v-model="state.password" placeholder="Password" :type="show ? 'text' : 'password'"
-                    :ui="{ trailing: 'pe-1' }" class="w-full" :disabled="loading">
+                <UInput v-model="state.password" variant="subtle" placeholder="Password"
+                    :type="show ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full" :disabled="loading">
                     <template #trailing>
                         <UButton color="neutral" variant="link" size="sm" class="cursor-pointer"
                             :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -20,7 +21,7 @@
         </div>
         <div class="col-span-full md:col-span-6">
             <UFormField label="Confirm Password" name="confirm_password">
-                <UInput v-model="state.confirm_password" placeholder="Confirm Password"
+                <UInput v-model="state.confirm_password" variant="subtle" placeholder="Confirm Password"
                     :type="showConfirm ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full"
                     :disabled="loading">
                     <template #trailing>
@@ -100,20 +101,29 @@ async function signUpNewUser() {
         })
 
         if (error) {
-            console.error(error)
-        } else {
             toast.add({
-                title: 'Success',
-                description: 'Email for verification has been sent',
-                color: 'success',
+                icon: 'i-lucide-circle-x',
+                title: 'Error',
+                description: error.message,
+                color: 'error',
             })
-            resetState()
-            setTimeout(() => {
-                router.push('/auth/sign-in')
-            }, 1500)
+            return
         }
+
+
+        toast.add({
+            title: 'Success',
+            description: 'Email for verification has been sent',
+            color: 'success',
+        })
+        resetState()
+        setTimeout(() => {
+            router.push('/auth/sign-in')
+        }, 1500)
     } catch (error) {
         console.error(error)
+    } finally {
+        loading.value = false
     }
 }
 

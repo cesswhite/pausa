@@ -11,7 +11,8 @@
         }">
             <UButton block color="neutral" variant="ghost" size="lg" class="w-full cursor-pointer">
                 <template #leading>
-                    <UAvatar :src="user?.user_metadata.picture" class="hidden xl:block size-10" />
+                    <UAvatar :src="user?.user_metadata.picture || user?.user_metadata.avatar_url"
+                        class="hidden xl:block size-10" />
                 </template>
                 <template #default>
                     <div class="flex flex-col gap-0 text-left items-start justify-between w-full">

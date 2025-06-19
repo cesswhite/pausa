@@ -2,12 +2,12 @@
     <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="resetPassword">
         <div class="col-span-full">
             <UFormField label="New password" name="password">
-                <UInput v-model="state.password" type="password" class="w-full" />
+                <UInput v-model="state.password" variant="subtle" type="password" class="w-full" />
             </UFormField>
         </div>
         <div class="col-span-full">
             <UFormField label="Confirm password" name="confirm_password">
-                <UInput v-model="state.confirm_password" type="password" class="w-full" />
+                <UInput v-model="state.confirm_password" variant="subtle" type="password" class="w-full" />
             </UFormField>
         </div>
         <div class="col-span-full mt-4">
@@ -67,10 +67,11 @@ async function resetPassword() {
                 description: 'Your password has been changed, please sign in to continue',
                 color: 'success',
             })
-            resetState()
+
             setTimeout(() => {
+                resetState()
                 router.push('/auth/sign-in')
-            }, 1500)
+            }, 1000)
         }
     } catch (error) {
         console.error(error)

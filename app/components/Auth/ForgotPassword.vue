@@ -2,7 +2,7 @@
     <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="sendResetEmail">
         <div class="col-span-full">
             <UFormField label="Email" name="email">
-                <UInput v-model="state.email" type="email" class="w-full" />
+                <UInput v-model="state.email" placeholder="Email" variant="subtle" type="email" class="w-full" />
             </UFormField>
         </div>
         <div class="col-span-full mt-4">

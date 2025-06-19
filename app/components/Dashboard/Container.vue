@@ -82,8 +82,8 @@
                             </span>
                             <span
                                 class=" inline-block text-sm font-medium text-dark-950/50 dark:text-dark-50/60 size-8 rounded-full overflow-hidden">
-                                <img :src="user?.user_metadata?.picture" alt="Profile Picture" loading="lazy"
-                                    class="size-full rounded-full object-cover">
+                                <img :src="user?.user_metadata?.picture || user?.user_metadata?.avatar_url"
+                                    alt="Profile Picture" loading="lazy" class="size-full rounded-full object-cover">
                             </span>
                         </li>
                         <li

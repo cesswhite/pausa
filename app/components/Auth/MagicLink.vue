@@ -16,6 +16,7 @@ const route = useRoute()
 async function signInWithEmail() {
     if (!state.value.email) {
         toast.add({
+            icon: 'i-lucide-circle-x',
             title: 'Error',
             description: 'No email provided',
             color: 'error',
@@ -33,17 +34,19 @@ async function signInWithEmail() {
         })
         if (error) {
             toast.add({
+                icon: 'i-lucide-circle-x',
                 title: 'Error',
                 description: error.message,
                 color: 'error',
             })
-        } else {
-            toast.add({
-                title: 'Success',
-                description: 'Magic link sent',
-                color: 'success',
-            })
+            return
         }
+        toast.add({
+            icon: 'i-lucide-check-circle',
+            title: 'Success',
+            description: 'Magic link sent',
+            color: 'success',
+        })
         loadingButtonMagicLink.value = false
     } catch (error) {
         console.error(error)
