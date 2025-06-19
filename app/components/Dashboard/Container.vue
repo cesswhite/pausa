@@ -129,7 +129,7 @@
             </DashboardCardSimple>
         </div>
         <div class="col-span-full">
-            <DashboardCardSimple>
+            <DashboardCardSimple blur-content>
                 <template #title>
                     User Metadata
                 </template>
@@ -145,5 +145,4 @@
 
 <script setup lang="ts">
 const user = useSupabaseUser()
-
 </script>

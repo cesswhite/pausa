@@ -16,10 +16,5 @@
                 <span class="text-sm font-medium">Settings</span>
             </ULink>
         </nav>
-
     </div>
 </template>
-
-<script setup lang="ts">
-
-</script>
