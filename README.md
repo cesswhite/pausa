@@ -1,30 +1,30 @@
 ![pausa_cover_image](https://res.cloudinary.com/dpvsklksg/image/upload/Eco-Assets/Screenshot_2025-06-20_at_4.05.02_p.m._m9islr.png)
 
-# Pausa: Complete Authentication Starter Template for Nuxt 3
+# Pausa: Minimal Authentication Starter Template for Nuxt
 
-**Pausa** is a modern web application built with **Nuxt 3** that serves as a **complete authentication template** and **starter kit** for developers. It provides a robust authentication flow that can be integrated into any application in seconds.
+**Pausa** is a modern web application built with **Nuxt** and **Supabase** that serves as a **minimal authentication template** and **starter kit** for developers. It provides a robust authentication flow that can be integrated into any application in seconds.
 
 ## 🎯 **Main Purpose**
 
-Pausa is a **complete authentication solution** that allows developers to integrate a robust authentication flow into their applications in seconds. It functions as a **starter template** that includes everything needed to handle user authentication and management.
+Pausa is a **minimal authentication solution** that allows developers to integrate a robust authentication flow into their applications in seconds. It functions as a **starter template** that includes everything needed to handle user authentication and management.
 
 ## 🏗️ **Technical Architecture**
 
 ### **Technology Stack:**
 
-- **Frontend**: Nuxt 3 (Vue 3) with TypeScript
-- **UI Framework**: Nuxt UI v3 (based on Tailwind CSS)
-- **Database**: Supabase (PostgreSQL + Auth)
+- **Frontend**: Nuxt with TypeScript
+- **UI Framework**: Nuxt UI
+- **Database**: Supabase (Auth)
 - **Global State**: Pinia
 - **Animations**: VueUse Motion
 - **State Management**: Composables + Stores
 
 ### **Built on cutting-edge technologies:**
 
-- Nuxt 3 for powerful, streamlined development
-- Nuxt UI v3 for customizable and sleek UI components
+- Nuxt for powerful, streamlined development
+- Nuxt UI for customizable and sleek UI components
 - Pinia for state management simplicity
-- Tailwind CSS v4 for responsive and modern design
+- Tailwind CSS for responsive and modern design
 - Supabase for backend-as-a-service with authentication
 - Fully compatible with the Nuxt v4 folder structure
 
