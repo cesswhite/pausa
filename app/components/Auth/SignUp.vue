@@ -92,11 +92,12 @@ async function signUpNewUser() {
     }
     try {
         loading.value = true
+        const config = useRuntimeConfig()
         const { data, error } = await client.auth.signUp({
             email: state.value.email,
             password: state.value.password,
             options: {
-                emailRedirectTo: 'http://localhost:3000/auth/confirm',
+                emailRedirectTo: `${config.public.siteUrl}/auth/confirm`,
             },
         })
 

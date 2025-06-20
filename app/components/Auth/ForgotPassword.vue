@@ -43,8 +43,9 @@ async function sendResetEmail() {
     }
     try {
         loading.value = true
+        const config = useRuntimeConfig()
         let { data, error } = await client.auth.resetPasswordForEmail(state.value.email, {
-            redirectTo: `http://localhost:3000/auth/reset-password/`,
+            redirectTo: `${config.public.siteUrl}/auth/reset-password/`,
         })
 
         if (error) {

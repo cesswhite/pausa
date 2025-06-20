@@ -87,6 +87,7 @@ async function signInWithEmail() {
         }
 
         toast.add({
+            icon: 'i-lucide-check-circle',
             title: 'Success',
             description: 'Signed in successfully',
             color: 'success',

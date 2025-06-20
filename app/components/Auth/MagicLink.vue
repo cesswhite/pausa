@@ -25,11 +25,12 @@ async function signInWithEmail() {
     }
     try {
         loadingButtonMagicLink.value = true
+        const config = useRuntimeConfig()
         const { data, error } = await client.auth.signInWithOtp({
             email: state.value.email || '',
             options: {
                 shouldCreateUser: route.name === 'auth-sign-up',
-                emailRedirectTo: 'http://localhost:3000/auth/confirm',
+                emailRedirectTo: `${config.public.siteUrl}/auth/confirm`,
             },
         })
         if (error) {

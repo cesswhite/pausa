@@ -14,6 +14,11 @@ export default defineNuxtConfig({
       ]
     },
   },
+  runtimeConfig: {
+    public: {
+      siteUrl: process.env.NUXT_SITE_URL || 'http://localhost:3000'
+    }
+  },
   css: ["~/assets/css/global.css", "~/assets/css/main.css"],
   devtools: { enabled: true },
   future: {

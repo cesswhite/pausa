@@ -145,6 +145,35 @@ app/
    yarn install
    ```
 
+3. Set up environment variables:
+
+   Create a `.env` file in the root directory and add the following variables:
+
+   ```env
+   # Supabase Configuration
+   SUPABASE_URL=your_supabase_project_url
+   SUPABASE_KEY=your_supabase_anon_key
+
+   # Site Configuration
+   NUXT_SITE_URL=http://localhost:3000
+   ```
+
+   **How to get Supabase credentials:**
+
+   1. Go to [Supabase](https://supabase.com) and create a new project
+   2. Navigate to Settings → API in your Supabase dashboard
+   3. Copy the "Project URL" and "anon/public" key
+   4. Replace `your_supabase_project_url` and `your_supabase_anon_key` with your actual values
+
+   **For production:**
+
+   ```env
+   # Production environment variables
+   SUPABASE_URL=https://your-project.supabase.co
+   SUPABASE_KEY=your_supabase_anon_key
+   NUXT_SITE_URL=https://yourdomain.com
+   ```
+
 ### **Development**
 
 Start the development server:

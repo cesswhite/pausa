@@ -1,6 +1,6 @@
 <template>
     <NuxtLayout name="dashboard">
-        <DashboardContainer />
+        <DashboardContainer v-motion-slide-visible-bottom />
     </NuxtLayout>
 </template>
 
