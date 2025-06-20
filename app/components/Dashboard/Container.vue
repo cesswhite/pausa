@@ -1,5 +1,16 @@
 <template>
-    <div class="grid grid-cols-12 gap-4 mt-1">
+    <div v-if="!user" class="grid grid-cols-12 gap-4 mt-1">
+        <div class="col-span-full md:col-span-6">
+            <USkeleton class="size-full h-56" />
+        </div>
+        <div class="col-span-full md:col-span-6">
+            <USkeleton class="size-full h-56" />
+        </div>
+        <div class="col-span-full">
+            <USkeleton class="size-full h-96" />
+        </div>
+    </div>
+    <div v-else class="grid grid-cols-12 gap-4 mt-1">
         <div class="col-span-full md:col-span-6">
             <AppCard>
                 <template #title>
