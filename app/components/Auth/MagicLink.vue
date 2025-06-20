@@ -1,57 +1,26 @@
 <template>
     <UButton @click="signInWithEmail" block variant="outline" type="button" class="cursor-pointer" color="neutral"
-        label="Continue with Magic Link" :loading="loadingButtonMagicLink">
+        label="Continue with Magic Link" :loading="loadingStates.magicLink">
         <template #leading>
             <UIcon name="i-lucide-sparkles" />
         </template>
     </UButton>
 </template>
 <script setup lang="ts">
-const client = useSupabaseClient()
-const loadingButtonMagicLink = ref(false)
 const { state } = storeToRefs(useAuthStore())
-const toast = useToast()
+const { sendMagicLink } = useAuthActions()
+const { loadingStates, withLoading } = useLoadingState()
+const { showError } = useToastMessages()
 const route = useRoute()
 
 async function signInWithEmail() {
     if (!state.value.email) {
-        toast.add({
-            icon: 'i-lucide-circle-x',
-            title: 'Error',
-            description: 'No email provided',
-            color: 'error',
-        })
+        showError('Error', 'No email provided')
         return
     }
-    try {
-        loadingButtonMagicLink.value = true
-        const config = useRuntimeConfig()
-        const { data, error } = await client.auth.signInWithOtp({
-            email: state.value.email || '',
-            options: {
-                shouldCreateUser: route.name === 'auth-sign-up',
-                emailRedirectTo: `${config.public.siteUrl}/auth/confirm`,
-            },
-        })
-        if (error) {
-            toast.add({
-                icon: 'i-lucide-circle-x',
-                title: 'Error',
-                description: error.message,
-                color: 'error',
-            })
-            return
-        }
-        toast.add({
-            icon: 'i-lucide-check-circle',
-            title: 'Success',
-            description: 'Magic link sent',
-            color: 'success',
-        })
-        loadingButtonMagicLink.value = false
-    } catch (error) {
-        console.error(error)
-        loadingButtonMagicLink.value = false
-    }
+
+    await withLoading('magicLink', () =>
+        sendMagicLink(state.value.email!, route.name === 'auth-sign-up')
+    )
 }
 </script>

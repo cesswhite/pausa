@@ -21,11 +21,11 @@
             <div class="relative bottom-2 left-0 w-full md:absolute">
                 <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
                     By creating an account or signing in, you agree to our
-                    <NuxtLink to="/terms-of-service" class="text-primary-500 dark:text-primary-400">
+                    <NuxtLink to="#" class="text-primary-500 dark:text-primary-400">
                         Terms of Service
                     </NuxtLink>
                     and
-                    <NuxtLink to="/privacy-policy" class="text-primary-500 dark:text-primary-400">
+                    <NuxtLink to="#" class="text-primary-500 dark:text-primary-400">
                         Privacy Policy
                     </NuxtLink>
                 </small>
@@ -46,10 +46,10 @@
                 </div>
             </div>
             <div class="relative z-10 h-full overflow-hidden rounded-lg ">
-                <img v-show="$colorMode.value === 'light'" :src="auth_image_light"
+                <img v-motion-fade v-show="$colorMode.value === 'light'" :src="auth_image_light"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
                     loading="lazy" quality="80" />
-                <img v-show="$colorMode.value === 'dark'" :src="auth_image_dark"
+                <img v-motion-fade v-show="$colorMode.value === 'dark'" :src="auth_image_dark"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
                     loading="lazy" quality="80" />
             </div>

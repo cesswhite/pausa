@@ -1,5 +1,5 @@
 <template>
-    <UButton block :aria-label="label" :label="label" @click="signOut" icon="i-lucide-log-out" variant="link"
+    <UButton block :aria-label="label" :label="label" @click="handleSignOut" icon="i-lucide-log-out" variant="link"
         color="neutral" class="cursor-pointer flex items-center justify-start gap-2 px-2 py-2.5" />
 </template>
 
@@ -7,10 +7,10 @@
 const props = defineProps<{
     label?: string
 }>()
-const client = useSupabaseClient();
-const signOut = async () => {
-    const { error } = await client.auth.signOut();
-    if (error) return;
-    navigateTo('/');
-};
+
+const { signOut } = useAuthActions()
+
+const handleSignOut = async () => {
+    await signOut()
+}
 </script>

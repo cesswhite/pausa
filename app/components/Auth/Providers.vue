@@ -1,12 +1,12 @@
 <template>
     <UButton @click="signInWithGoogle" block variant="solid" type="button" class="cursor-pointer" color="neutral"
-        label="Continue with Google" :loading="loadingButtonGoogle">
+        label="Continue with Google" :loading="loadingStates.google">
         <template #leading>
             <UIcon name="i-devicon-google" />
         </template>
     </UButton>
     <UButton @click="signInWithGitHub" block variant="subtle" type="button" class="cursor-pointer" color="neutral"
-        label="Continue with GitHub" :loading="loadingButtonGithub">
+        label="Continue with GitHub" :loading="loadingStates.github">
         <template #leading>
             <UIcon name="i-simple-icons-github" />
         </template>
@@ -15,30 +15,29 @@
 </template>
 <script setup lang="ts">
 const client = useSupabaseClient()
-const loadingButtonGoogle = ref(false)
-const loadingButtonGithub = ref(false)
+const { loadingStates, withLoading } = useLoadingState()
 
 async function signInWithGitHub() {
-    loadingButtonGithub.value = true
-    const { error } = await client.auth.signInWithOAuth({
-        provider: "github",
-        options: {
-            redirectTo: '/app/dashboard',
-        },
-    });
-    loadingButtonGithub.value = false
-    if (error) console.log(error);
+    await withLoading('github', async () => {
+        const { error } = await client.auth.signInWithOAuth({
+            provider: "github",
+            options: {
+                redirectTo: '/app/dashboard',
+            },
+        })
+        if (error) console.error(error)
+    })
 }
 
 async function signInWithGoogle() {
-    loadingButtonGoogle.value = true
-    const { error } = await client.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: '/app/dashboard',
-        },
-    });
-    loadingButtonGoogle.value = false
-    if (error) console.log(error);
+    await withLoading('google', async () => {
+        const { error } = await client.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: '/app/dashboard',
+            },
+        })
+        if (error) console.error(error)
+    })
 }
 </script>

@@ -3,13 +3,14 @@
         <div class="col-span-full">
             <UFormField label="Email" name="email">
                 <UInput v-model="state.email" variant="subtle" placeholder="Email" type="email" class="w-full"
-                    :disabled="loading" />
+                    :disabled="loadingStates.signUp" />
             </UFormField>
         </div>
         <div class="col-span-full md:col-span-6">
             <UFormField label="Password" name="password">
                 <UInput v-model="state.password" variant="subtle" placeholder="Password"
-                    :type="show ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full" :disabled="loading">
+                    :type="show ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full"
+                    :disabled="loadingStates.signUp">
                     <template #trailing>
                         <UButton color="neutral" variant="link" size="sm" class="cursor-pointer"
                             :icon="show ? 'i-lucide-eye-off' : 'i-lucide-eye'"
@@ -23,7 +24,7 @@
             <UFormField label="Confirm Password" name="confirm_password">
                 <UInput v-model="state.confirm_password" variant="subtle" placeholder="Confirm Password"
                     :type="showConfirm ? 'text' : 'password'" :ui="{ trailing: 'pe-1' }" class="w-full"
-                    :disabled="loading">
+                    :disabled="loadingStates.signUp">
                     <template #trailing>
                         <UButton color="neutral" variant="link" size="sm"
                             :icon="showConfirm ? 'i-lucide-eye-off' : 'i-lucide-eye'" :aria-label="showConfirm ? 'Hide password' : 'Show password'
@@ -34,7 +35,7 @@
             </UFormField>
         </div>
         <div class="col-span-full mt-4">
-            <UButton block type="submit" class="cursor-pointer" color="primary" :loading="loading">
+            <UButton block type="submit" class="cursor-pointer" color="primary" :loading="loadingStates.signUp">
                 Create Account
             </UButton>
             <div class="my-2">
@@ -60,72 +61,26 @@
 </template>
 
 <script setup lang="ts">
-import type { FormError } from "#ui/types";
-
-const client = useSupabaseClient()
 const { state } = storeToRefs(useAuthStore())
-const show = ref(false);
-const showConfirm = ref(false);
-const loading = ref(false)
-const toast = useToast()
-const router = useRouter()
 const { resetState } = useAuthStore()
+const { validateSignUpForm } = useFormValidation()
+const { signUpWithEmail } = useAuthActions()
+const { loadingStates, withLoading } = useLoadingState()
 
-const validate = (state: any): FormError[] => {
-    const errors = [];
-    if (!state.email) errors.push({ name: "email", message: "Field required" });
-    if (!state.password)
-        errors.push({ name: "password", message: "Field required" });
-    if (!state.confirm_password)
-        errors.push({ name: "confirm_password", message: "Field required" });
-    if (state.password !== state.confirm_password)
-        errors.push({
-            name: "confirm_password",
-            message: "Passwords do not match",
-        });
-    return errors;
-};
+const show = ref(false)
+const showConfirm = ref(false)
+
+const validate = (state: any) => validateSignUpForm(state)
 
 async function signUpNewUser() {
-    if (!state.value.email || !state.value.password) {
-        return
-    }
-    try {
-        loading.value = true
-        const config = useRuntimeConfig()
-        const { data, error } = await client.auth.signUp({
-            email: state.value.email,
-            password: state.value.password,
-            options: {
-                emailRedirectTo: `${config.public.siteUrl}/auth/confirm`,
-            },
-        })
+    if (!state.value.email || !state.value.password) return
 
-        if (error) {
-            toast.add({
-                icon: 'i-lucide-circle-x',
-                title: 'Error',
-                description: error.message,
-                color: 'error',
-            })
-            return
-        }
+    const result = await withLoading('signUp', () =>
+        signUpWithEmail(state.value.email!, state.value.password!)
+    )
 
-
-        toast.add({
-            title: 'Success',
-            description: 'Email for verification has been sent',
-            color: 'success',
-        })
+    if (result.success) {
         resetState()
-        setTimeout(() => {
-            router.push('/auth/sign-in')
-        }, 1500)
-    } catch (error) {
-        console.error(error)
-    } finally {
-        loading.value = false
     }
 }
-
 </script>

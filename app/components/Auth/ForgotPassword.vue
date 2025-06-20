@@ -2,11 +2,12 @@
     <UForm :validate="validate" :state="state" class="grid grid-cols-12 gap-4" @submit="sendResetEmail">
         <div class="col-span-full">
             <UFormField label="Email" name="email">
-                <UInput v-model="state.email" placeholder="Email" variant="subtle" type="email" class="w-full" />
+                <UInput v-model="state.email" placeholder="Email" variant="subtle" type="email" class="w-full"
+                    :disabled="loadingStates.passwordReset" />
             </UFormField>
         </div>
         <div class="col-span-full mt-4">
-            <UButton block type="submit" class="cursor-pointer" color="primary" :loading="loading">
+            <UButton block type="submit" class="cursor-pointer" color="primary" :loading="loadingStates.passwordReset">
                 Send reset link
             </UButton>
             <div class="mt-4">
@@ -21,57 +22,23 @@
 </template>
 
 <script setup lang="ts">
-import type { FormError } from "#ui/types";
-const client = useSupabaseClient()
-const toast = useToast()
 const { state } = storeToRefs(useAuthStore())
-const loading = ref(false)
-const router = useRouter()
 const { resetState } = useAuthStore()
+const { validateForgotPasswordForm } = useFormValidation()
+const { sendPasswordReset } = useAuthActions()
+const { loadingStates, withLoading } = useLoadingState()
 
-const validate = (state: any): FormError[] => {
-    const errors = [];
-    if (!state.email) errors.push({ name: "email", message: "Field required" });
-
-    return errors;
-};
-
+const validate = (state: any) => validateForgotPasswordForm(state)
 
 async function sendResetEmail() {
-    if (!state.value.email) {
-        return
-    }
-    try {
-        loading.value = true
-        const config = useRuntimeConfig()
-        let { data, error } = await client.auth.resetPasswordForEmail(state.value.email, {
-            redirectTo: `${config.public.siteUrl}/auth/reset-password/`,
-        })
+    if (!state.value.email) return
 
-        if (error) {
-            toast.add({
-                icon: 'i-lucide-alert-circle',
-                title: 'Error',
-                description: error.message,
-                color: 'error',
-            })
-            console.error(error)
-        } else {
-            toast.add({
-                icon: 'i-lucide-check-circle',
-                title: 'Success',
-                description: 'We have sent you a link to reset your password',
-                color: 'success',
-            })
-            resetState()
-            setTimeout(() => {
-                router.push('/auth/sign-in')
-            }, 1000)
-        }
-    } catch (error) {
-        console.error(error)
-    } finally {
-        loading.value = false
+    const result = await withLoading('passwordReset', () =>
+        sendPasswordReset(state.value.email!)
+    )
+
+    if (result.success) {
+        resetState()
     }
 }
 </script>
