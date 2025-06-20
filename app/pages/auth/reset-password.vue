@@ -12,6 +12,7 @@ const toast = useToast()
 onMounted(async () => {
     if (route.query.code && route.query.type) {
         toast.add({
+            icon: 'i-lucide-check-circle',
             title: 'Change your password',
             description: 'Enter your new password and confirm it to change it',
             color: 'success',

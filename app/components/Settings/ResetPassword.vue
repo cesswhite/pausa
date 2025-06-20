@@ -14,13 +14,6 @@
             <UButton block type="submit" class="cursor-pointer" color="primary" :loading="loading">
                 Change password
             </UButton>
-            <div class="mt-4">
-                <small class="text-dark-950/50 dark:text-dark-50/50 inline-block w-full text-center text-sm">
-                    Remember your password?
-                    <NuxtLink to="/auth/sign-in" class="text-primary-500 dark:text-primary-400">Sign in here
-                    </NuxtLink>
-                </small>
-            </div>
         </div>
     </UForm>
 </template>
@@ -50,7 +43,6 @@ async function resetPassword() {
     try {
         loading.value = true
         const { data, error } = await client.auth.updateUser({
-            email: user.value?.email,
             password: state.value.password,
         })
 
@@ -66,14 +58,14 @@ async function resetPassword() {
             toast.add({
                 icon: 'i-lucide-check-circle',
                 title: 'Success',
-                description: 'Your password has been changed, please sign in to continue',
+                description: 'Your password has been changed, you will be redirected in 3 seconds',
                 color: 'success',
             })
-
-            setTimeout(() => {
-                resetState()
-                router.push('/auth/sign-in')
-            }, 1000)
+            setTimeout(async () => {
+                const { error } = await client.auth.signOut();
+                if (error) return;
+                navigateTo('/');
+            }, 3000)
         }
     } catch (error) {
         console.error(error)

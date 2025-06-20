@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-12 gap-4 mt-1">
         <div class="col-span-full md:col-span-6">
-            <DashboardCardSimple>
+            <AppCard>
                 <template #title>
                     General Information
                 </template>
@@ -66,10 +66,10 @@
                         </li>
                     </ul>
                 </template>
-            </DashboardCardSimple>
+            </AppCard>
         </div>
         <div class="col-span-full md:col-span-6">
-            <DashboardCardSimple>
+            <AppCard>
                 <template #title>
                     Personal Information
                 </template>
@@ -126,10 +126,10 @@
 
                     </ul>
                 </template>
-            </DashboardCardSimple>
+            </AppCard>
         </div>
         <div class="col-span-full">
-            <DashboardCardSimple blur-content>
+            <AppCard blur-content>
                 <template #title>
                     User Metadata
                 </template>
@@ -138,7 +138,7 @@
                         {{ user }}
                     </pre>
                 </template>
-            </DashboardCardSimple>
+            </AppCard>
         </div>
     </div>
 </template>

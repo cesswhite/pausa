@@ -49,6 +49,7 @@ async function sendResetEmail() {
 
         if (error) {
             toast.add({
+                icon: 'i-lucide-alert-circle',
                 title: 'Error',
                 description: error.message,
                 color: 'error',
@@ -56,6 +57,7 @@ async function sendResetEmail() {
             console.error(error)
         } else {
             toast.add({
+                icon: 'i-lucide-check-circle',
                 title: 'Success',
                 description: 'We have sent you a link to reset your password',
                 color: 'success',
@@ -63,7 +65,7 @@ async function sendResetEmail() {
             resetState()
             setTimeout(() => {
                 router.push('/auth/sign-in')
-            }, 1500)
+            }, 1000)
         }
     } catch (error) {
         console.error(error)
