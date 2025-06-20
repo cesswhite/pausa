@@ -45,13 +45,13 @@
                     </div>
                 </div>
             </div>
-            <div class="relative z-10 h-full overflow-hidden rounded-lg ">
-                <img v-motion-fade v-show="$colorMode.value === 'light'" :src="auth_image_light"
+            <div class="relative z-10 h-full overflow-hidden rounded-lg">
+                <img v-motion-fade-visible v-show="$colorMode.value === 'light'" :src="auth_image_light"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
-                    loading="lazy" quality="80" />
-                <img v-motion-fade v-show="$colorMode.value === 'dark'" :src="auth_image_dark"
+                    loading="lazy" width="560" height="1024" />
+                <img v-motion-fade-visible v-show="$colorMode.value === 'dark'" :src="auth_image_dark"
                     :alt="auth_image_alt ?? 'Eco Development Studios'" class="size-full rounded-lg object-cover"
-                    loading="lazy" quality="80" />
+                    loading="lazy" width="560" height="1024" />
             </div>
         </div>
     </div>
