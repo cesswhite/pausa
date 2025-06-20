@@ -2,6 +2,8 @@
     <div class="h-full w-full relative">
         <NuxtLayout name="default">
             <LandingHero />
+            <LandingFeatures />
+            <LandingAbout />
         </NuxtLayout>
     </div>
 </template>
