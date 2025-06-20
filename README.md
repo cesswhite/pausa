@@ -1,4 +1,4 @@
-![v4.20_cover_image](https://github.com/user-attachments/assets/db3b68fb-4677-4326-96b5-8a24e92a91a4)
+![pausa_cover_image](https://res.cloudinary.com/dpvsklksg/image/upload/Eco-Assets/Screenshot_2025-06-20_at_4.05.02_p.m._m9islr.png)
 
 # Pausa: Complete Authentication Starter Template for Nuxt 3
 

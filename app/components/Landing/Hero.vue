@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex h-full min-h-screen w-full items-center justify-center bg-dark-50 dark:bg-dark-950">
+    <div class="relative flex h-full min-h-screen w-full items-center justify-center">
         <div v-motion :initial="{ opacity: 0, filter: 'blur(10px)' }" :enter="{ opacity: 1, filter: 'blur(0px)' }"
             :delay="100" :duration="1250" class="relative z-20 w-11/12 2xl:w-1/2">
             <div class="flex flex-col items-center justify-center">
