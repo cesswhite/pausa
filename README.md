@@ -127,6 +127,38 @@ app/
 
 - Node.js (>= 14.x)
 - npm or yarn
+- **Supabase Account**: You need to have a Supabase account and be familiar with creating projects
+- **OAuth Providers Setup**: Familiarity with creating OAuth applications for Google and GitHub
+
+### **Required Accounts & Setup**
+
+#### **1. Supabase Account**
+
+- Create a free account at [Supabase](https://supabase.com)
+- Create a new project in your Supabase dashboard
+- Familiarize yourself with the Supabase dashboard and API settings
+
+#### **2. Google OAuth Setup**
+
+- Go to [Google Cloud Console](https://console.cloud.google.com/)
+- Create a new project or select an existing one
+- Enable the Google+ API
+- Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client IDs"
+- Set up authorized redirect URIs: `https://your-project.supabase.co/auth/v1/callback`
+- Copy your **Client ID** and **Client Secret**
+
+#### **3. GitHub OAuth Setup**
+
+- Go to [GitHub Developer Settings](https://github.com/settings/developers)
+- Click "New OAuth App"
+- Set the Authorization callback URL: `https://your-project.supabase.co/auth/v1/callback`
+- Copy your **Client ID** and **Client Secret**
+
+#### **4. Configure OAuth in Supabase**
+
+- In your Supabase dashboard, go to "Authentication" → "Providers"
+- Enable and configure Google and GitHub providers
+- Add the Client IDs and Client Secrets from the previous steps
 
 ### **Installation**
 
@@ -165,6 +197,12 @@ app/
    3. Copy the "Project URL" and "anon/public" key
    4. Replace `your_supabase_project_url` and `your_supabase_anon_key` with your actual values
 
+   **Important Notes:**
+
+   - The OAuth providers (Google and GitHub) are configured directly in your Supabase dashboard
+   - No additional environment variables are needed for OAuth as Supabase handles the configuration
+   - Make sure you've completed the OAuth setup steps above before testing social login
+
    **For production:**
 
    ```env
@@ -199,6 +237,38 @@ yarn build
 ### **Deployment**
 
 After building the project, you can deploy the `dist` directory to your preferred hosting service.
+
+## 🔧 **Troubleshooting**
+
+### **Common OAuth Issues**
+
+#### **Google OAuth Not Working**
+
+- Ensure you've enabled the Google+ API in Google Cloud Console
+- Verify the redirect URI matches exactly: `https://your-project.supabase.co/auth/v1/callback`
+- Check that your Client ID and Secret are correctly configured in Supabase
+- Make sure your Google Cloud project has billing enabled (required for OAuth)
+
+#### **GitHub OAuth Not Working**
+
+- Verify the Authorization callback URL is set correctly in GitHub OAuth App settings
+- Ensure the Client ID and Secret are properly configured in Supabase
+- Check that your GitHub OAuth App is not in development mode (if you want to test with non-owner accounts)
+
+#### **Supabase Configuration Issues**
+
+- Double-check your `SUPABASE_URL` and `SUPABASE_KEY` in the `.env` file
+- Ensure your Supabase project is active and not paused
+- Verify that Authentication is enabled in your Supabase project settings
+
+### **Getting Help**
+
+If you encounter issues:
+
+1. Check the [Supabase Documentation](https://supabase.com/docs)
+2. Review the [Nuxt 3 Documentation](https://nuxt.com/docs)
+3. Check the [Nuxt UI Documentation](https://ui.nuxt.com)
+4. Open an issue in this repository with detailed error information
 
 ## 📚 **Usage**
 
