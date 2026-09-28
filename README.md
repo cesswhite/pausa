@@ -2,6 +2,9 @@
 
 # Pausa: Minimal Authentication Starter Template for Nuxt
 
+[Repository guide](docs/REPOSITORY_GUIDE.md): code map, authentication flows, scripts and limits.
+[AGENTS.md](AGENTS.md) provides concise instructions for coding assistants.
+
 **Pausa** is a modern web application built with **Nuxt** and **Supabase** that serves as a **minimal authentication template** and **starter kit** for developers. It provides a robust authentication flow that can be integrated into any application in seconds.
 
 ## 🎯 **Main Purpose**
@@ -12,9 +15,9 @@ Pausa is a **minimal authentication solution** that allows developers to integra
 
 ### **Technology Stack:**
 
-- **Frontend**: Nuxt with TypeScript
-- **UI Framework**: Nuxt UI
-- **Database**: Supabase (Auth)
+- **Frontend**: Nuxt 3.17.3 with TypeScript
+- **UI Framework**: Nuxt UI 3.1.2
+- **Authentication**: Supabase Auth (no application database schema is implemented here)
 - **Global State**: Pinia
 - **Animations**: VueUse Motion
 - **State Management**: Composables + Stores
@@ -26,7 +29,7 @@ Pausa is a **minimal authentication solution** that allows developers to integra
 - Pinia for state management simplicity
 - Tailwind CSS for responsive and modern design
 - Supabase for backend-as-a-service with authentication
-- Fully compatible with the Nuxt v4 folder structure
+- Uses the Nuxt v4 folder convention through `future.compatibilityVersion: 4`
 
 ## 📁 **Project Structure**
 
@@ -78,8 +81,8 @@ app/
 
 ### **Key Configuration:**
 
-- **SEO Optimized**: Automatic meta tags
-- **Strict TypeScript**: Complete typing
+- **SEO**: Public-home canonical/schema; auth and app routes remain outside indexing
+- **TypeScript**: Nuxt type checking enabled during build
 - **Hot Module Replacement**: Fast development
 - **Auto-imports**: Automatic Nuxt configuration
 - **Tailwind CSS v4**: Modern styling
@@ -88,9 +91,9 @@ app/
 
 ### **Global State:**
 
-- **Pinia Store**: For authentication data
+- **Pinia Store**: For transient form fields; Supabase owns the session
 - **Composables**: For reusable logic
-- **Supabase Client**: Direct database integration
+- **Supabase Client**: Authentication actions and session/user access
 
 ## 🚀 **Project Strengths**
 
@@ -125,8 +128,8 @@ app/
 
 ### **Prerequisites**
 
-- Node.js (>= 14.x)
-- npm or yarn
+- Node.js 22 or another runtime supported by the installed Nuxt version
+- Bun, using the committed `bun.lock`
 - **Supabase Account**: You need to have a Supabase account and be familiar with creating projects
 - **OAuth Providers Setup**: Familiarity with creating OAuth applications for Google and GitHub
 
@@ -140,25 +143,23 @@ app/
 
 #### **2. Google OAuth Setup**
 
-- Go to [Google Cloud Console](https://console.cloud.google.com/)
-- Create a new project or select an existing one
-- Enable the Google+ API
-- Go to "Credentials" → "Create Credentials" → "OAuth 2.0 Client IDs"
-- Set up authorized redirect URIs: `https://your-project.supabase.co/auth/v1/callback`
-- Copy your **Client ID** and **Client Secret**
+- Follow Supabase's current [Google login guide](https://supabase.com/docs/guides/auth/social-login/auth-google).
+- Configure the Google OAuth client and the authorized origins/callback supplied by your Supabase project.
+- Store the provider credentials in Supabase's provider settings, not in this repository.
 
 #### **3. GitHub OAuth Setup**
 
-- Go to [GitHub Developer Settings](https://github.com/settings/developers)
-- Click "New OAuth App"
-- Set the Authorization callback URL: `https://your-project.supabase.co/auth/v1/callback`
-- Copy your **Client ID** and **Client Secret**
+- Follow Supabase's current [GitHub login guide](https://supabase.com/docs/guides/auth/social-login/auth-github).
+- Configure the GitHub OAuth app with the callback supplied by your Supabase project.
+- Store the provider credentials in Supabase's provider settings.
 
 #### **4. Configure OAuth in Supabase**
 
 - In your Supabase dashboard, go to "Authentication" → "Providers"
 - Enable and configure Google and GitHub providers
 - Add the Client IDs and Client Secrets from the previous steps
+- Verify the Site URL and allowed redirect URLs for each environment. Source code does not confirm dashboard configuration.
+- `Auth/Providers.vue` currently passes a relative `/app/dashboard` redirect; email flows build absolute URLs from `NUXT_SITE_URL`. See the guide before diagnosing return-path behavior.
 
 ### **Installation**
 
@@ -172,30 +173,18 @@ app/
 2. Install dependencies:
 
    ```sh
-   npm install
-   # or
-   yarn install
+   bun install --frozen-lockfile
    ```
 
 3. Set up environment variables:
 
-   Create a `.env` file in the root directory and add the following variables:
+   Configure these names in your local environment and deployment provider. Do not commit values:
 
-   ```env
-   # Supabase Configuration
-   SUPABASE_URL=your_supabase_project_url
-   SUPABASE_KEY=your_supabase_anon_key
-
-   # Site Configuration
-   NUXT_SITE_URL=http://localhost:3000
-   ```
-
-   **How to get Supabase credentials:**
-
-   1. Go to [Supabase](https://supabase.com) and create a new project
-   2. Navigate to Settings → API in your Supabase dashboard
-   3. Copy the "Project URL" and "anon/public" key
-   4. Replace `your_supabase_project_url` and `your_supabase_anon_key` with your actual values
+   | Name | Purpose |
+   | --- | --- |
+   | `SUPABASE_URL` | Project endpoint used by the Supabase module. |
+   | `SUPABASE_KEY` | Browser-compatible Auth key; never a privileged server key. |
+   | `NUXT_SITE_URL` | Site origin used for email and recovery redirects. |
 
    **Important Notes:**
 
@@ -203,23 +192,14 @@ app/
    - No additional environment variables are needed for OAuth as Supabase handles the configuration
    - Make sure you've completed the OAuth setup steps above before testing social login
 
-   **For production:**
-
-   ```env
-   # Production environment variables
-   SUPABASE_URL=https://your-project.supabase.co
-   SUPABASE_KEY=your_supabase_anon_key
-   NUXT_SITE_URL=https://yourdomain.com
-   ```
+   Production requires its own correct environment and allowed redirects; no private project identifiers or credentials belong in documentation.
 
 ### **Development**
 
 Start the development server:
 
 ```sh
-npm run dev
-# or
-yarn dev
+bun run dev
 ```
 
 The application will be available at `http://localhost:3000`.
@@ -229,14 +209,15 @@ The application will be available at `http://localhost:3000`.
 To build the project for production:
 
 ```sh
-npm run build
-# or
-yarn build
+bun run build
 ```
 
 ### **Deployment**
 
-After building the project, you can deploy the `dist` directory to your preferred hosting service.
+Use the Nitro preset appropriate to your host. With the Node server preset, `bun run build`
+produces `.output/`, started using `node .output/server/index.mjs`. Preview locally with
+`bun run preview`. `bun run generate` is a separate static-generation option; verify auth
+redirects and hosting behavior before selecting it. There is no default `dist/` deployment here.
 
 ## 🔧 **Troubleshooting**
 
@@ -244,16 +225,15 @@ After building the project, you can deploy the `dist` directory to your preferre
 
 #### **Google OAuth Not Working**
 
-- Ensure you've enabled the Google+ API in Google Cloud Console
-- Verify the redirect URI matches exactly: `https://your-project.supabase.co/auth/v1/callback`
+- Verify the OAuth client and authorized callback against the current Google guide above
 - Check that your Client ID and Secret are correctly configured in Supabase
-- Make sure your Google Cloud project has billing enabled (required for OAuth)
+- Check provider consent/audience settings and Supabase's allowed return URLs
 
 #### **GitHub OAuth Not Working**
 
 - Verify the Authorization callback URL is set correctly in GitHub OAuth App settings
 - Ensure the Client ID and Secret are properly configured in Supabase
-- Check that your GitHub OAuth App is not in development mode (if you want to test with non-owner accounts)
+- Check the provider error and Supabase's allowed return URLs; do not infer remote settings from the local code
 
 #### **Supabase Configuration Issues**
 
@@ -274,28 +254,15 @@ If you encounter issues:
 
 ### **State Management**
 
-This project uses Pinia for state management. Example store:
-
-```typescript
-export const useAuthStore = defineStore("useAuthStore", {
-  state: () => ({
-    name: "",
-    email: "",
-    password: "",
-    confirm_password: "",
-  }),
-  actions: {
-    resetState() {
-      // Reset state logic
-    },
-  },
-});
-```
+`app/stores/auth.ts` exports `useAuthStore`. Its nested `state` object holds `name`, `email`,
+`password` and `confirm_password` form fields; `resetState` clears them. The authenticated
+user and session come from Supabase composables, not from those fields. Do not log form
+passwords or session tokens when investigating state.
 
 ### **Components**
 
 - **Auth Components**: Complete authentication flow
-- **Dashboard Components**: Admin panel and navigation
+- **Dashboard Components**: Authenticated workspace navigation; no admin-role system
 - **Landing Components**: Marketing and entry pages
 - **App Components**: General application components
 
@@ -313,10 +280,10 @@ export const useAuthStore = defineStore("useAuthStore", {
 
 ## 🔒 **Security Features**
 
-- **Route Protection**: Middleware-based authentication
-- **Input Validation**: Form validation and sanitization
-- **Session Management**: Secure session handling
-- **Environment Variables**: Secure configuration management
+- **Route Protection**: Middleware guards dashboard/settings navigation; future APIs/data need their own authorization
+- **Input Validation**: Form field checks; not a general sanitization layer
+- **Session Management**: Supabase Auth sessions, with provider configuration verified separately
+- **Environment Variables**: Configuration names documented above; never commit credentials or privileged keys
 
 ## 🎨 **Design System**
 
