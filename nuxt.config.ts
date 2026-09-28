@@ -19,6 +19,10 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_SITE_URL || 'http://localhost:3000'
     }
   },
+  routeRules: {
+    '/auth/**': { headers: { 'X-Robots-Tag': 'noindex' } },
+    '/app/**': { headers: { 'X-Robots-Tag': 'noindex' } },
+  },
   css: ["~/assets/css/global.css", "~/assets/css/main.css"],
   devtools: { enabled: true },
   future: {
