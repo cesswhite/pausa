@@ -1,0 +1,11 @@
+# Pausa
+
+> A minimal authentication starter for Nuxt projects with Supabase, by Eco Development Studios.
+
+Pausa presents an authentication template with email/password, social-provider and magic-link flows.
+
+## Public pages
+
+- [Pausa](https://pausa.ecostudios.dev/): product overview and features.
+- [Sitemap](https://pausa.ecostudios.dev/sitemap.xml): public page list.
+- [Eco Development Studios](https://www.ecostudios.dev/): publisher.
